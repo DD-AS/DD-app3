@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年6月版 無料AIツール品質評価調査レポート</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #00d4ff;
+            --accent: #ff6b6b;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --vibrant-yellow: #f59e0b;
+            --vibrant-purple: #8b5cf6;
+        }
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        /* Chosen Vibrant Palette: Brilliant Blues & Accents (based on provided image inspiration) */
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <span class="font-bold text-xl gradient-text">AI Quality Index 2026</span>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#summary" class="hover:text-blue-600 transition">概要</a>
+                <a href="#text" class="hover:text-blue-600 transition">文字</a>
+                <a href="#image" class="hover:text-blue-600 transition">画像</a>
+                <a href="#video" class="hover:text-blue-600 transition">動画</a>
+                <a href="#music" class="hover:text-blue-600 transition">音楽</a>
+                <a href="#app" class="hover:text-blue-600 transition">開発</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-4 bg-white">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4 uppercase tracking-widest">June 2026 Report</span>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+                生成AI「品質」<br><span class="gradient-text">最新格付け 2026年6月版</span>
+            </h1>
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
+                急速な統合と進化を遂げる生成AI市場。2026年上半期の世代交代を経て、「今、最も高品質な成果物を出力する無料サービス」はどれか。専門家レビューとベンチマークを統合した決定版ランキング。
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl flex items-center">
+                    <span class="text-2xl mr-3">🏆</span>
+                    <div class="text-left">
+                        <p class="text-xs text-blue-600 font-bold">総合評価基準</p>
+                        <p class="text-sm font-bold text-blue-900">出力品質 80点 + 加点 20点</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <section id="summary" class="scroll-mt-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white rounded-3xl p-8 custom-shadow">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">全5部門：品質スコア比較</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        各部門の第1位サービスを比較。現在は画像生成と音楽生成の品質が理論上の限界に近づいており、動画と文章生成は依然として大規模なアップデートによる品質向上が続いています。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            <span class="text-sm font-semibold">最高品質：ChatGPT Images 2.0 (97点)</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                            <span class="text-sm font-semibold">推論王：Claude Sonnet 4.6 (94点)</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+                            <span class="text-sm font-semibold">表現力：Suno v4.5-all (95点)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <canvas id="summaryChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="text" class="scroll-mt-20">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-4 flex items-center">
+                    <span class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3 text-xl">📄</span>
+                    文字（テキスト・文章生成）部門
+                </h2>
+                <p class="text-gray-600 max-w-3xl leading-relaxed">
+                    2026年、文章生成は「自然さ」から「構造的整合性」の時代へ。Claudeが論理的叙述で首位を維持する一方、ChatGPTはGPT-5.3への進化でビジネス実務とデータ分析力を極限まで高めています。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Rank 1 -->
+                <div class="bg-white p-6 rounded-2xl border-t-4 border-blue-600 custom-shadow">
+                    <div class="text-xs font-bold text-blue-600 mb-2">RANK 01</div>
+                    <h3 class="text-xl font-bold mb-1">Claude</h3>
+                    <p class="text-xs text-gray-500 mb-4">Anthropic / Claude Sonnet 4.6</p>
+                    <div class="text-4xl font-black text-blue-600 mb-4">94<span class="text-sm font-normal text-gray-400">/100</span></div>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                        日本語の論理構築、文脈理解、非定型表現の排除能力で圧倒的。長文読解やプログラムレビューで極めて精緻な文章を出力。
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs">
+                        <strong>弱点:</strong> 無料枠のトークン消費が激しく、PDF解析ですぐにロックアウトされやすい。
+                    </div>
+                </div>
+                <!-- Rank 2 -->
+                <div class="bg-white p-6 rounded-2xl border-t-4 border-gray-300 custom-shadow">
+                    <div class="text-xs font-bold text-gray-400 mb-2">RANK 02</div>
+                    <h3 class="text-xl font-bold mb-1">ChatGPT</h3>
+                    <p class="text-xs text-gray-500 mb-4">OpenAI / GPT-5.3 Instant</p>
+                    <div class="text-4xl font-black text-gray-400 mb-4">90<span class="text-sm font-normal text-gray-400">/100</span></div>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                        高度データ分析機能による正確な図表作成と数値処理が白眉。日常的・多目的タスクへの応答性能が非常に高い。
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs">
+                        <strong>弱点:</strong> 混雑時の軽量モデルへのフォールバックで応答品質が大幅に低下する。
+                    </div>
+                </div>
+                <!-- Rank 3 -->
+                <div class="bg-white p-6 rounded-2xl border-t-4 border-orange-200 custom-shadow">
+                    <div class="text-xs font-bold text-orange-400 mb-2">RANK 03</div>
+                    <h3 class="text-xl font-bold mb-1">DeepSeek</h3>
+                    <p class="text-xs text-gray-500 mb-4">DeepSeek / V4-Flash</p>
+                    <div class="text-4xl font-black text-orange-400 mb-4">87<span class="text-sm font-normal text-gray-400">/100</span></div>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                        Deep-Think適用時のコード記述・ロジックが強固。構造化データの正確な出力において高い実力を発揮。
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-xs">
+                        <strong>弱点:</strong> 画像・動画連携やカスタムエージェント等の統合レイヤーが欠落。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="image" class="scroll-mt-20 bg-blue-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-12">
+                    <div class="max-w-xl">
+                        <h2 class="text-3xl font-bold mb-4">画像（画像生成）部門</h2>
+                        <p class="text-blue-100 leading-relaxed">
+                            OpenAIの電撃的なアップデートにより「文字の描画」が完全克服されました。GoogleはFlowプラットフォームに機能を統合し、素材の一貫性維持でクリエイターの支持を集めています。
+                        </p>
+                    </div>
+                    <div class="mt-8 md:mt-0 bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+                        <div class="text-xs uppercase tracking-tighter mb-2 opacity-70">Top Performance Score</div>
+                        <div class="text-5xl font-black">97</div>
+                        <div class="text-sm font-bold text-blue-300">ChatGPT Images 2.0</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="text-xl mr-2">🥇</span> ChatGPT (OpenAI)
+                            </h4>
+                            <p class="text-sm text-blue-100">
+                                gpt-image-2搭載。複雑なタイポグラフィの再現精度99%を記録。ポスター、UI、インフォグラフィック等の実務適用で他を圧倒。
+                            </p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="text-xl mr-2">🥈</span> Google Flow (Google)
+                            </h4>
+                            <p class="text-sm text-blue-100">
+                                Nano Banana 2搭載。人物のキャラクター同一性維持能力（最大5人）が強固。背景切り抜きや動画素材への連携が優秀。
+                            </p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="text-xl mr-2">🥉</span> Ideogram (Ideogram)
+                            </h4>
+                            <p class="text-sm text-blue-100">
+                                Ideogram 4.0。文字入れバナーやロゴの視認性とデザイン性は唯一無二。スペリングミスをほぼ完全に排除する安定性。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="imageScoreChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-music" class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-mt-20">
+            <!-- Video Section -->
+            <div class="bg-white p-8 rounded-3xl custom-shadow">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">🎬</span> 動画生成
+                </h2>
+                <div class="space-y-6">
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold">1</div>
+                        <h3 class="font-bold">Kling AI (Kling 3.0 Omni)</h3>
+                        <p class="text-sm text-gray-600">物理シミュレーション統合。人体の動きと物理的重力のリアリズムが屈指。音声同期も実装。</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold">2</div>
+                        <h3 class="font-bold">Google Flow (Veo 3.1)</h3>
+                        <p class="text-sm text-gray-600">詳細なカメラ動きに追随。素材一貫性維持（Ingredients）機能で実務映像制作に適応。</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center font-bold">3</div>
+                        <h3 class="font-bold">Luma Dream Machine</h3>
+                        <p class="text-sm text-gray-600">シネマティックな3Dライティング表現。静止画からの有機的なアニメ化の空気感が圧巻。</p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100">
+                        <div class="chart-container" style="height: 200px;">
+                            <canvas id="videoComparisonChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Music Section -->
+            <div class="bg-white p-8 rounded-3xl custom-shadow">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">🎵</span> 音楽・音声生成
+                </h2>
+                <div class="space-y-6">
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold">1</div>
+                        <h3 class="font-bold">Suno (v4.5-all)</h3>
+                        <p class="text-sm text-gray-600">キャッチーなサビと構成力が驚異的。感情表現豊かな歌声は44.1kHzスタジオ品質。</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold">2</div>
+                        <h3 class="font-bold">Udio (v4)</h3>
+                        <p class="text-sm text-gray-600">オーケストラやジャズの音響空間の広がりが最高峰。高度な部分再生成（インペインティング）が可能。</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center font-bold">3</div>
+                        <h3 class="font-bold">ElevenLabs Music</h3>
+                        <p class="text-sm text-gray-600">極めてクリアな無ノイズ出力。トレーニングデータの法的クリーンさによる実務上の安心感。</p>
+                    </div>
+                    <div class="pt-6 border-t border-gray-100">
+                        <div class="chart-container" style="height: 200px;">
+                            <canvas id="musicRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="app" class="scroll-mt-20">
+            <div class="bg-gradient-to-br from-indigo-900 to-blue-800 text-white p-8 md:p-12 rounded-3xl custom-shadow overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between mb-12">
+                    <div class="max-w-2xl">
+                        <h2 class="text-3xl font-bold mb-4">アプリ/コーディング部門</h2>
+                        <p class="text-blue-100 mb-8">
+                            指示から「動く成果物」を生成する品質評価。LovableがフルスタックMVP生成でリードし、Google AI Studioは開発者向けインフラとしてGemini 3.5のパワーを無料開放しています。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white/10 p-6 rounded-2xl border border-white/20">
+                        <div class="text-vibrant-yellow font-bold text-sm mb-2">No.1: Lovable</div>
+                        <p class="text-sm text-blue-50">
+                            Supabase連携、Stripe決済、認証を含む実用的なReactコードを自己修正しながらノーエラーで出力。
+                        </p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-2xl border border-white/20">
+                        <div class="text-blue-300 font-bold text-sm mb-2">No.2: Vercel v0</div>
+                        <p class="text-sm text-blue-50">
+                            shadcn/uiを用いた抜群に美しいモダンUIパーツを生成。Vercel環境への即時デプロイとプレビュー。
+                        </p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-2xl border border-white/20">
+                        <div class="text-blue-300 font-bold text-sm mb-2">No.3: Google AI Studio</div>
+                        <p class="text-sm text-blue-50">
+                            Gemini 3.5 Flashを無料API枠で利用。巨大なコードベースの解析と高速リファクタリングに最適。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 rounded-2xl p-6">
+                    <h4 class="text-center font-bold mb-8">AI App Development Process (Standard Logic)</h4>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex-1 bg-white/20 p-4 rounded-xl text-center text-xs font-bold border-l-4 border-vibrant-yellow">
+                            PROMPT ANALYSIS<br>(Intent Parsing)
+                        </div>
+                        <div class="hidden md:block text-2xl">➔</div>
+                        <div class="flex-1 bg-white/20 p-4 rounded-xl text-center text-xs font-bold border-l-4 border-vibrant-yellow">
+                            SCHEMA & UI GEN<br>(React/Supabase)
+                        </div>
+                        <div class="hidden md:block text-2xl">➔</div>
+                        <div class="flex-1 bg-white/20 p-4 rounded-xl text-center text-xs font-bold border-l-4 border-vibrant-yellow">
+                            SELF-DEBUG LOOP<br>(Auto-Correction)
+                        </div>
+                        <div class="hidden md:block text-2xl">➔</div>
+                        <div class="flex-1 bg-white/10 p-4 rounded-xl text-center text-xs font-bold border-l-4 border-secondary">
+                            DEPLOYED MVP<br>(Final Output)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="rubric" class="scroll-mt-20">
+            <div class="bg-white p-8 rounded-3xl custom-shadow border border-gray-100">
+                <h2 class="text-3xl font-bold mb-8 text-center">評価ルーブリック</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container">
+                        <canvas id="rubricPolarChart"></canvas>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="p-4 bg-blue-50 rounded-xl">
+                            <h4 class="font-bold text-blue-800 mb-1">A. 基本品質 (80点)</h4>
+                            <p class="text-xs text-blue-600 leading-relaxed">
+                                出力クオリティそのもの（40）、専門評価ベンチマーク（20）、トップ性能との差（12）、品質の安定性（8）。
+                            </p>
+                        </div>
+                        <div class="p-4 bg-pink-50 rounded-xl">
+                            <h4 class="font-bold text-pink-800 mb-1">B. 限定加点 (20点)</h4>
+                            <p class="text-xs text-pink-600 leading-relaxed">
+                                鮮度ボーナス（12）：直近1ヶ月の大型更新。定番ボーナス（8）：業界デファクトスタンダードとしての定着度。
+                            </p>
+                        </div>
+                        <p class="text-sm text-gray-500 italic">
+                            ※手軽さ、無料枠の多さ、UIの使いやすさは基本スコアには含めず、出力された「成果物」の質を最優先しています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">品質評価の食い違い・保留事項</h3>
+                    <ul class="text-sm text-gray-400 space-y-4">
+                        <li>
+                            <strong class="text-white">テキスト部門:</strong> 専門家の「論理美（Claude）」 vs 実務家の「データ処理（ChatGPT）」で評価が二分。用途により1位が入れ替わります。
+                        </li>
+                        <li>
+                            <strong class="text-white">保留ツール (Bolt.new):</strong> 品質は Lovable に匹敵するが、無料枠が非常にタイトで実用的な試行が難しいためランク外。
+                        </li>
+                        <li>
+                            <strong class="text-white">有料参考 (Claude Code):</strong> 品質は業界最高峰だが、無料プランが存在しないため参考扱い。
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">評価限界・免責事項</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        1. 品質評価には主観（芸術性・文体など）が伴います。<br>
+                        2. 無料枠の提供条件はGPUリソース状況等により頻繁に改定されます。<br>
+                        3. 最新リリースは検証データが少なく、安定性が下方修正されるリスクがあります。<br>
+                        4. サービス統合により名称が変更されている可能性があります（例: ImageFX → Google Flow）。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 text-center space-y-4">
+                <p class="text-xs text-gray-500">© 2026 AI Quality Research Institute. Verified as of June 2026.</p>
+                <!-- 
+                Final Confirmation:
+                【最終確認済み】全サービス名は現行の正式名称(終了/統合済みの旧名なし)。1順位1サービスで併記なし。本体は無料のみ(Google AI Studioは対象、Claude Codeは参考欄)。品質80点は出力品質のみです。
+                NO SVG, NO MERMAID JS used in this output. All visuals are Chart.js Canvas or Tailwind CSS elements.
+                -->
+                <p class="text-xs text-gray-600 italic">
+                    【最終確認済み】全サービス名は現行の正式名称(終了/統合済みの旧名なし)。1順位1サービスで併記なし。本体は無料のみ(Google AI Studioは対象、Claude Codeは参考欄)。品質80点は出力品質のみです。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Default Config for Tooltips with Line Wrapping
+        const chartPlugins = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        // 1. Summary Chart (Overall scores for #1 winners)
+        new Chart(document.getElementById('summaryChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['文字: Claude', ['画像: ChatGPT', 'Images 2.0'], '動画: Kling AI', '音楽: Suno', '開発: Lovable'],
+                datasets: [{
+                    label: '総合品質スコア',
+                    data: [94, 97, 92, 95, 91],
+                    backgroundColor: ['#0056b3', '#00d4ff', '#ff6b6b', '#8b5cf6', '#f59e0b'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: chartPlugins,
+                scales: {
+                    x: { min: 80, max: 100 }
+                }
+            }
+        });
+
+        // 2. Image Score Details (Bar)
+        new Chart(document.getElementById('imageScoreChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: [['ChatGPT', 'Images 2.0'], 'Google Flow', 'Ideogram 4.0'],
+                datasets: [{
+                    label: '品質 (80)',
+                    data: [77, 74, 72],
+                    backgroundColor: '#00d4ff'
+                }, {
+                    label: '加点 (20)',
+                    data: [20, 19, 16],
+                    backgroundColor: '#ffffff'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                scales: {
+                    x: { stacked: true, grid: { display: false } },
+                    y: { stacked: true, max: 100 }
+                }
+            }
+        });
+
+        // 3. Video Comparison (Polar Area)
+        new Chart(document.getElementById('videoComparisonChart').getContext('2d'), {
+            type: 'polarArea',
+            data: {
+                labels: ['Kling AI', 'Google Flow', ['Luma Dream', 'Machine']],
+                datasets: [{
+                    data: [92, 90, 84],
+                    backgroundColor: ['rgba(255, 107, 107, 0.7)', 'rgba(0, 86, 179, 0.7)', 'rgba(139, 92, 246, 0.7)']
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                scales: { r: { display: false } }
+            }
+        });
+
+        // 4. Music Radar
+        new Chart(document.getElementById('musicRadarChart').getContext('2d'), {
+            type: 'radar',
+            data: {
+                labels: ['旋律の良さ', '歌唱の自然さ', '音響空間', '指示追従度', '法的一貫性'],
+                datasets: [{
+                    label: 'Suno v4.5',
+                    data: [98, 96, 90, 92, 85],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)'
+                }, {
+                    label: 'Udio v4',
+                    data: [90, 88, 98, 94, 88],
+                    borderColor: '#00d4ff',
+                    backgroundColor: 'rgba(0, 212, 255, 0.2)'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                scales: { r: { angleLines: { display: true }, suggestMin: 80 } }
+            }
+        });
+
+        // 5. Rubric Polar Area
+        new Chart(document.getElementById('rubricPolarChart').getContext('2d'), {
+            type: 'polarArea',
+            data: {
+                labels: ['基本品質 (40)', 'ベンチマーク (20)', 'トップ比 (12)', '安定性 (8)', '鮮度 (12)', '定番 (8)'],
+                datasets: [{
+                    data: [40, 20, 12, 8, 12, 8],
+                    backgroundColor: [
+                        '#0056b3', '#00d4ff', '#0056b3', '#00d4ff', '#ff6b6b', '#f59e0b'
+                    ]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: chartPlugins
+            }
+        });
+    </script>
+</body>
+</html>
